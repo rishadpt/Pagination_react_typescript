@@ -1,0 +1,19 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:1rem;
+
+    li {
+        cursor: pointer;
+        list-style: none;
+        background: #b8b3ab;
+        padding: 0.5rem 1rem;
+        color: #fff;
+    }
+    .selected{
+        background: #000;
+        color: #fff;
+    }
+
+}
