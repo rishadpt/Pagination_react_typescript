@@ -8,7 +8,8 @@ function App() {
   const [data,setData] = useState<any>([]);
   const [loading,setLoading] = useState<boolean>(false);
   const [currentPage,setCurrentPage] = useState<number>(1)
-  const [postsPerPage,setPostsPerPage] = useState<number>(2)
+  const [rowsPerPage,setrowsPerPage] = useState<number>(10)
+
 
   useEffect(() => {
     TableServices.getTabledata()
@@ -25,22 +26,25 @@ function App() {
     )
   }, [])
 
-
+console.log(rowsPerPage)
 
   //get current page
-  const indexofLastdata =  currentPage * postsPerPage; 
-  const indexofFirstdata = indexofLastdata - postsPerPage;
+  const indexofLastdata =  currentPage * rowsPerPage; 
+  const indexofFirstdata = indexofLastdata - rowsPerPage;
   try{
     var currentdata = data.slice(indexofFirstdata,indexofLastdata);
   }catch(e){
   }
  
 
+  if (loading) {
+    return <h2>LOADING ...</h2>
+  }
   return (
     <div className="App">
     
-    <Table posts={currentdata} loading={loading} />
-    <Pagination currentpage={currentPage} totalPages={data.length} postsPerPage={postsPerPage} activePage={setCurrentPage}  />
+    <Table posts={currentdata} setdata={setData}  rowperpage={setrowsPerPage}/>
+    <Pagination   currentpage={currentPage} totalPages={data.length} postsPerPage={rowsPerPage} activePage={setCurrentPage}  />
     </div>
   );
 }
