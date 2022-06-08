@@ -27,6 +27,12 @@
         }
     }
 
+    .rowper {
+        label {
+            margin-right: 0.5rem;
+        }
+    }
+
     .filter {
         display: flex;
         gap: 1rem;
@@ -36,9 +42,12 @@
     .filterbtn {
         border: none;
         background: rgb(184, 184, 184);
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.8rem;
         border-radius: 5px;
         color: #fff;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
 
         &:hover {
             background: rgb(0, 0, 0);
