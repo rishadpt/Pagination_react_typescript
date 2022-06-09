@@ -3,17 +3,17 @@ import React, { Key, useEffect, useState } from 'react'
 import { tableProps } from '../../utils/types'
 import './Table.scss'
 
-export default function Table({ posts, setdata, rowperpage,firstdata,lastdata,filter }: tableProps) {
+export default function Table({ posts, setdata, rowperpage,filter,activePage }: tableProps) {
   const [length, setLength] = useState<string>('')
   
 
   console.log(filter)
 
   const filterData = (e: any) => {
-    console.log("filter",length)
+    setdata(filter)
+    console.log(filter,"its filter")
     const filterData = filter.filter((post: any) => post.studentclass === length)
-    console.log("filteringgg",filter)
-    console.log(posts.studentclass)
+    setdata(filterData)
   }
 const Reset = () => {
   rowperpage(2)
@@ -22,7 +22,7 @@ const Reset = () => {
 
   const handleChange = (e: any) => {
     rowperpage(e.target.value)
-
+    activePage(1)
   }
 
   return (

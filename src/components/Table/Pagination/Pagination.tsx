@@ -11,16 +11,43 @@ export default function Pagination({ totalPages, postsPerPage, activePage, curre
   console.log("total",totalPages)
   for (let i =1 ; i <= Math.ceil(totalPages / postsPerPage); i++) {
     pageNumbers.push(i);
+
   }
 
+  const getPaginationGroup = () => {
+    let start = Math.floor((currentpage - 1) / pagenolimit) * pagenolimit;
+    return new Array(pagenolimit).fill(undefined).map((_, idx) => start + idx + 1);
+  };
+
+  function changePage(e:any) {
+    const pageNumber = Number(e.target.textContent);
+    console.log(pageNumber)
+   activePage(pageNumber);
+  }
+  function goToNextPage() {
+    console.log(totalPages)
+    if (currentpage< totalPages/postsPerPage  ) {
+      activePage(currentpage + 1);
+    }
+  }
+  function goTobackPage() {
+    if(currentpage > 1){
+    activePage( currentpage - 1);
+    }
+  }
+
+  console.log(postsPerPage)
   return (
     
     <ul className="pagination">
-      {pageNumbers && pageNumbers.map((number: number) => (
-          <li className={(currentpage === number) ? 'page-item selected' : ''} onClick={() => activePage(number)} key={number} >
-          {number}
+        <p onClick={goTobackPage}>Previous Page</p>
+       {getPaginationGroup().map((number: number) => (
+          <li 
+          style={{display:`${totalPages/postsPerPage+1 <= number && 'none' }`}} className={(currentpage === number) ? 'page-item selected' : ''} onClick={(e) =>{ changePage(e)}} key={number} >
+          { number}
         </li>
       ))}
+      <p style={{display:`${currentpage === totalPages/postsPerPage ? 'none' : 'block' }`}} onClick={goToNextPage}>NEXT PAGE</p>
     </ul>
   )
 

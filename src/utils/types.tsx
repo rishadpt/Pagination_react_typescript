@@ -2,8 +2,7 @@ export interface tableProps {
     posts: any;
     setdata: (data: any) => void;
     rowperpage: (Number: number) => void;
-    lastdata : number,
-    firstdata : number,
+    activePage: (Number: number) => void;
     filter:any,
 
 }
